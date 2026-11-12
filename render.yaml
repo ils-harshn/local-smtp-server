@@ -3,7 +3,7 @@ services:
     name: smtp-mail-server
     plan: free
     runtime: python
-    buildCommand: pip install -r requirements.txt
+    buildCommand: pip install --upgrade pip && pip install -r requirements.txt
     startCommand: python -m smtp_server.main
     healthCheckPath: /health
     envVars:

@@ -212,6 +212,8 @@ Use Render mainly for the **HTTP API** and **persistent disk** (`render.yaml`).
 
 For Render:
 
+**Build must use Python 3.11**, not 3.14. If `pydantic-core` / `maturin` / Rust errors appear, Render picked the wrong Python: add `runtime.txt` and `.python-version` (both in this repo), set **`PYTHON_VERSION`** = `3.11.9` in the service environment, then **Clear build cache & deploy** again.
+
 1. Push repo to Git; create **Blueprint** from `render.yaml` or a **Web Service** with:
    - **Build**: `pip install -r requirements.txt`
    - **Start**: `python -m smtp_server.main`
