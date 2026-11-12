@@ -1,0 +1,39 @@
+services:
+  - type: web
+    name: smtp-mail-server
+    plan: free
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: python -m smtp_server.main
+    healthCheckPath: /health
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.11.9"
+      - key: SMTP_HOST
+        value: 0.0.0.0
+      - key: SMTP_PORT
+        value: "2525"
+      - key: OUTBOUND_MODE
+        value: direct
+      - key: DATA_DIR
+        value: /var/data
+      - key: SMTP_AUTH_USER
+        sync: false
+      - key: SMTP_AUTH_PASSWORD
+        sync: false
+      - key: OUTBOUND_SMTP_HOST
+        sync: false
+      - key: OUTBOUND_SMTP_PORT
+        sync: false
+      - key: OUTBOUND_SMTP_USER
+        sync: false
+      - key: OUTBOUND_SMTP_PASSWORD
+        sync: false
+      - key: OUTBOUND_FROM_EMAIL
+        sync: false
+      - key: API_KEY
+        sync: false
+    disk:
+      name: mail-data
+      mountPath: /var/data
+      sizeGB: 1
